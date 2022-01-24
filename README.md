@@ -1,9 +1,3 @@
-## Running the application
-```
-git init
-git pull https://github.com/VDiPaola/single-earth-challenge
-docker-compose up
-```
 GET
 ```
 localhost:8080/polygons
@@ -27,7 +21,7 @@ localhost:8080/polygons
 
 
 
-#### known issues:
+#### issues:
 - area doesnt calculate properly on most randomly generated polygons
 - limited generation to 100 per request due to issues
 - might need to try requests multiple times if db connection not alive
