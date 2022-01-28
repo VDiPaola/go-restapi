@@ -152,35 +152,6 @@ func dbGetPolygons() ([]polygon, error) {
 	return polygons, nil
 }
 
-//checks if a given name is found in the database
-func dbNameExists(name string) (bool, error) {
-	//check db connection is alive
-	if pingErr := dbPing(); pingErr != nil {
-		return false, fmt.Errorf("dbNameExists: %v", pingErr)
-	}
-
-	//query database for count
-	rows, err := db.Query("SELECT COUNT(*) FROM enzo_challenge WHERE name=?", name)
-	if err != nil {
-		return false, fmt.Errorf("dbNameExists: %v", err)
-	}
-	defer rows.Close()
-
-	var count int
-
-	//get count from rows
-	for rows.Next() {
-		if err := rows.Scan(&count); err != nil {
-			return false, fmt.Errorf("dbNameExists: %v", err)
-		}
-	}
-
-	if count > 0 {
-		return true, nil
-	}
-	return false, nil
-}
-
 //checks if the provided points have intersections with polygons in database
 func dbCheckIntersections(points *[]point) (bool, error) {
 	//check db connection is alive
@@ -211,3 +182,34 @@ func dbCheckIntersections(points *[]point) (bool, error) {
 	}
 	return false, nil
 }
+
+//checks if a given name is found in the database
+func dbNameExists(name string) (bool, error) {
+	//check db connection is alive
+	if pingErr := dbPing(); pingErr != nil {
+		return false, fmt.Errorf("dbNameExists: %v", pingErr)
+	}
+
+	//query database for count
+	rows, err := db.Query("SELECT COUNT(*) FROM enzo_challenge WHERE name=?", name)
+	if err != nil {
+		return false, fmt.Errorf("dbNameExists: %v", err)
+	}
+	defer rows.Close()
+
+	var count int
+
+	//get count from rows
+	for rows.Next() {
+		if err := rows.Scan(&count); err != nil {
+			return false, fmt.Errorf("dbNameExists: %v", err)
+		}
+	}
+
+	if count > 0 {
+		return true, nil
+	}
+	return false, nil
+}
+
+

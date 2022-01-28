@@ -24,4 +24,4 @@ localhost:8080/polygons
 #### issues:
 - area doesnt calculate properly on most randomly generated polygons
 - limited generation to 100 per request due to issues
-- might need to try requests multiple times if db connection not alive
+- might need to try requests multiple times if db connection not alive 
